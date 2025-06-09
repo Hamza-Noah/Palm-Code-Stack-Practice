@@ -89,17 +89,6 @@ function Form() {
             {...form.getInputProps("lastDate")}
              minDate={new Date()}
           />
-          {form.values.creditAvailableForEmployee && (
-            <Text
-              c={
-                daysRequested > form.values.creditAvailableForEmployee
-                  ? "red"
-                  : "dimmed"
-              }
-            >
-              Requesting {daysRequested} day(s)
-            </Text>
-          )}
           <NumberInput
             label="Your Available Days"
             placeholder="Input placeholder"
@@ -111,6 +100,17 @@ function Form() {
             max={30}
           />
         </Flex>
+        {form.values.creditAvailableForEmployee && (
+            <Text
+              c={
+                daysRequested > form.values.creditAvailableForEmployee
+                  ? "red"
+                  : "dimmed"
+              }
+            >
+              Requesting {daysRequested} day(s)
+            </Text>
+          )}
         <Textarea
           style={{ flex: 1 }}
           size="md"
