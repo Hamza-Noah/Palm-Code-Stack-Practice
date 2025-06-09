@@ -1,7 +1,5 @@
 .d-flex {
     display: flex;
-    gap: 30px;
-    margin-block: 30px;
 
     &>* {
         flex: 1;
@@ -11,4 +9,8 @@
 h1 {
     text-align: center;
     margin-bottom: 50px;
+}
+
+form {
+    padding-right: 30px;
 }

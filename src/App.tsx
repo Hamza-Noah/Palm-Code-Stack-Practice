@@ -14,7 +14,6 @@ import { BrowserRouter } from 'react-router-dom';
 export default function App() {
   const computedColorScheme = useComputedColorScheme();
   const { setColorScheme } = useMantineColorScheme();
-
   return (
     <>
     <BrowserRouter>
@@ -37,16 +36,13 @@ export default function App() {
               <IconMoon size={18} />
             )}
           </ActionIcon>
-
-
-    <Routes>
-      <Route path="/" element={<h1>404</h1>} />
-      <Route path="/form" element={<Form />} />
-    </Routes>
-
+          <Routes>
+            <Route path="/" element={<h1>404</h1>} />
+            <Route path="/form" element={<Form />} />
+          </Routes>
         </div>
       </div>
-        </BrowserRouter>
+     </BrowserRouter>
     </>
   );
 }
