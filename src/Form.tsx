@@ -1,6 +1,6 @@
 import "@mantine/core/styles.css";
 import { Toaster } from "react-hot-toast";
-import { Button, Checkbox, Flex, Group } from "@mantine/core";
+import { Button, Checkbox, Flex, Group, NumberInput  } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
@@ -21,6 +21,7 @@ function Form() {
       reason: null,
       firstDate: null,
       lastDate: null,
+      creditAvailableForEmployee: null,
       message: "",
     },
   });
@@ -49,7 +50,7 @@ function Form() {
           {...form.getInputProps("reason")}
           clearable
         />
-        <Flex gap={"md"}>
+        <Flex gap={"md"} my={25}>
           
             <DateInput
                style={{ flex: 1 }}
@@ -68,6 +69,16 @@ function Form() {
               key={form.key("lastDate")}
               {...form.getInputProps("lastDate")}
             />
+             <NumberInput
+      label="Your Available Days"
+      placeholder="Input placeholder"
+      {...form.getInputProps("creditAvailableForEmployee")}
+      key={form.key("creditAvailableForEmployee")}
+       clampBehavior="strict"
+        suffix=" Days"
+       min={0}
+       max={30}
+    />
         </Flex>
         <Textarea
            style={{ flex: 1 }}
