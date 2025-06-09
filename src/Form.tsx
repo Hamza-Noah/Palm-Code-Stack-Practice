@@ -13,14 +13,10 @@ import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMemo } from "react";
+import reasonsForHoliday  from './reasonForLeave.enum';
 
 function Form() {
-  // type FormValues = {
-  //     reason: null;
-  //     firstDate: Date | null;
-  //     lastDate: Date | null;
-  //     message: string; //
-  //   };
+
 
   const form = useForm({
     mode: "controlled",
@@ -44,7 +40,7 @@ function Form() {
     return 0;
   }, [form.values.firstDate, form.values.lastDate]);
 
-  console.log(daysRequested);
+
 
   return (
     <>
@@ -53,19 +49,7 @@ function Form() {
         <Select
           label="Reason for Leave"
           placeholder="Choose a Reason"
-          data={[
-            "Vacation",
-            "Family",
-            "Illness",
-            "Travel",
-            "Personal",
-            "Emergency",
-            "Study",
-            "Wedding",
-            "Rest",
-            "Bereavement",
-            "Other",
-          ]}
+          data={reasonsForHoliday}
           key={form.key("reason")}
           {...form.getInputProps("reason")}
           clearable
