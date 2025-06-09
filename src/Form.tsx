@@ -70,7 +70,7 @@ function Form() {
           {...form.getInputProps("reason")}
           clearable
         />
-        <Flex gap={"md"} my={25}>
+        <Flex gap={"md"} mt={25} mb={10}>
           <DateInput
             style={{ flex: 1 }}
             label="Start Date"
@@ -101,7 +101,7 @@ function Form() {
           />
         </Flex>
         {form.values.creditAvailableForEmployee && (
-            <Text
+            <Text mb={20}
               c={
                 daysRequested > form.values.creditAvailableForEmployee
                   ? "red"
