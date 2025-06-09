@@ -40,6 +40,7 @@ export default function App() {
 
 
     <Routes>
+      <Route path="/" element={<h1>404</h1>} />
       <Route path="/form" element={<Form />} />
     </Routes>
 

@@ -59,16 +59,12 @@ export default function Sidebar() {
     </Tooltip>
   ));
 
-  const links = linksMockdata.map((link) => (
+  const links = linksMockdata.map((link, i) => (
     <>
   <Link to={"/form"}
+    key={i}
       className={classes.link}
       data-active={activeLink === link || undefined}
-      onClick={(event) => {
-        event.preventDefault();
-        setActiveLink(link);
-      }}
-      key={link}
     >
       {link}
     </Link>
