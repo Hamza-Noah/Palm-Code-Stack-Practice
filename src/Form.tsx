@@ -1,33 +1,20 @@
 import "@mantine/core/styles.css";
 import { Toaster } from "react-hot-toast";
-import { Button, useComputedColorScheme } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
-import { useMantineColorScheme, ActionIcon  } from '@mantine/core';
-import { IconSun, IconMoon } from '@tabler/icons-react';
 
 
 
 function Form() {
 
-  const computedColorScheme = useComputedColorScheme();
 
-  const { setColorScheme } = useMantineColorScheme();
 
   return (
     <>
 
-  <ActionIcon
-      variant="outline"
-      color={computedColorScheme === 'dark' ? 'yellow' : 'blue'}
-      onClick={() =>
-        setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark')
-      }
-      title="Toggle color scheme"
-    >
-      {computedColorScheme === 'dark' ? <IconSun size={18} /> : <IconMoon size={18} />}
-    </ActionIcon>
+  
       <h1>Applying For Leave</h1>
 
       <form
