@@ -1,10 +1,18 @@
 import "@mantine/core/styles.css";
 import { Toaster } from "react-hot-toast";
-import { Button, Checkbox, Flex, Group, NumberInput  } from "@mantine/core";
+import {
+  Button,
+  Checkbox,
+  Flex,
+  Group,
+  NumberInput,
+  Text,
+} from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { useMemo } from "react";
 
 function Form() {
   // type FormValues = {
@@ -15,7 +23,7 @@ function Form() {
   //   };
 
   const form = useForm({
-    mode: "uncontrolled",
+    mode: "controlled",
     initialValues: {
       termsOfService: false,
       reason: null,
@@ -25,6 +33,18 @@ function Form() {
       message: "",
     },
   });
+
+  const daysRequested = useMemo(() => {
+    const { firstDate, lastDate } = form.values;
+    if (firstDate && lastDate) {
+      const start = new Date(firstDate).getTime();
+      const end = new Date(lastDate).getTime();
+      return Math.ceil((end - start) / (1000 * 60 * 60 * 24) + 1);
+    }
+    return 0;
+  }, [form.values.firstDate, form.values.lastDate]);
+
+  console.log(daysRequested);
 
   return (
     <>
@@ -51,37 +71,46 @@ function Form() {
           clearable
         />
         <Flex gap={"md"} my={25}>
-          
-            <DateInput
-               style={{ flex: 1 }}
-              label="Start Date"
-              placeholder="Select Date"
-              valueFormat="YYYY MMM DD"
-              key={form.key("firstDate")}
-              {...form.getInputProps("firstDate")}
-            />
-            <DateInput
-               style={{ flex: 1 }}
-
-              label="Last Date"
-              placeholder="Select Date"
-              valueFormat="YYYY MMM DD"
-              key={form.key("lastDate")}
-              {...form.getInputProps("lastDate")}
-            />
-             <NumberInput
-      label="Your Available Days"
-      placeholder="Input placeholder"
-      {...form.getInputProps("creditAvailableForEmployee")}
-      key={form.key("creditAvailableForEmployee")}
-       clampBehavior="strict"
-        suffix=" Days"
-       min={0}
-       max={30}
-    />
+          <DateInput
+            style={{ flex: 1 }}
+            label="Start Date"
+            placeholder="Select Date"
+            valueFormat="YYYY MMM DD"
+            key={form.key("firstDate")}
+            {...form.getInputProps("firstDate")}
+          />
+          <DateInput
+            style={{ flex: 1 }}
+            label="Last Date"
+            placeholder="Select Date"
+            valueFormat="YYYY MMM DD"
+            key={form.key("lastDate")}
+            {...form.getInputProps("lastDate")}
+          />
+          {form.values.creditAvailableForEmployee && (
+            <Text
+              c={
+                daysRequested > form.values.creditAvailableForEmployee
+                  ? "red"
+                  : "dimmed"
+              }
+            >
+              Requesting {daysRequested} day(s)
+            </Text>
+          )}
+          <NumberInput
+            label="Your Available Days"
+            placeholder="Input placeholder"
+            {...form.getInputProps("creditAvailableForEmployee")}
+            key={form.key("creditAvailableForEmployee")}
+            clampBehavior="strict"
+            suffix=" Days"
+            min={0}
+            max={30}
+          />
         </Flex>
         <Textarea
-           style={{ flex: 1 }}
+          style={{ flex: 1 }}
           size="md"
           label="Provide Details For Leaving"
           placeholder="Details..."
