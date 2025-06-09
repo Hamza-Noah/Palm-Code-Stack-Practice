@@ -78,6 +78,7 @@ function Form() {
             valueFormat="YYYY MMM DD"
             key={form.key("firstDate")}
             {...form.getInputProps("firstDate")}
+             minDate={new Date()}
           />
           <DateInput
             style={{ flex: 1 }}
@@ -86,6 +87,7 @@ function Form() {
             valueFormat="YYYY MMM DD"
             key={form.key("lastDate")}
             {...form.getInputProps("lastDate")}
+             minDate={new Date()}
           />
           {form.values.creditAvailableForEmployee && (
             <Text
