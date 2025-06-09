@@ -23,6 +23,7 @@ export default function App() {
         </div>
         <div style={{ flex: 3 }}>
           <ActionIcon
+          mt={20}
             variant="outline"
             color={computedColorScheme === "dark" ? "yellow" : "blue"}
             onClick={() =>
