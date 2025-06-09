@@ -87,7 +87,7 @@ function Form() {
             valueFormat="YYYY MMM DD"
             key={form.key("lastDate")}
             {...form.getInputProps("lastDate")}
-             minDate={new Date()}
+              minDate={form.values.firstDate || new Date()}
           />
           <NumberInput
             label="Your Available Days"
