@@ -11,6 +11,7 @@ import {
 import { Title, Tooltip, UnstyledButton } from '@mantine/core';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './Sidebar.module.css';
+import { Link } from 'react-router-dom';
 
 const mainLinksMockdata = [
   { icon: IconHome2, label: 'Home' },
@@ -59,10 +60,10 @@ export default function Sidebar() {
   ));
 
   const links = linksMockdata.map((link) => (
-    <a
+    <>
+  <Link to={"/form"}
       className={classes.link}
       data-active={activeLink === link || undefined}
-      href="#"
       onClick={(event) => {
         event.preventDefault();
         setActiveLink(link);
@@ -70,7 +71,8 @@ export default function Sidebar() {
       key={link}
     >
       {link}
-    </a>
+    </Link>
+    </>
   ));
 
   return (

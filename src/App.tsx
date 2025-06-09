@@ -6,6 +6,10 @@ import {
   ActionIcon,
   useComputedColorScheme,
 } from "@mantine/core";
+import { Routes, Route } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
+
+
 
 export default function App() {
   const computedColorScheme = useComputedColorScheme();
@@ -13,6 +17,7 @@ export default function App() {
 
   return (
     <>
+    <BrowserRouter>
       <div className="d-flex">
         <div>
           <Sidebar />
@@ -33,9 +38,14 @@ export default function App() {
             )}
           </ActionIcon>
 
-          <Form />
+
+    <Routes>
+      <Route path="/form" element={<Form />} />
+    </Routes>
+
         </div>
       </div>
+        </BrowserRouter>
     </>
   );
 }
