@@ -1,5 +1,5 @@
 import "@mantine/core/styles.css";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import {
   Button,
   Checkbox,
@@ -13,11 +13,9 @@ import { Select } from "@mantine/core";
 import { Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMemo } from "react";
-import reasonsForHoliday  from './reasonForLeave.enum';
+import reasonsForHoliday from "./reasonForLeave.enum";
 
 function Form() {
-
-
   const form = useForm({
     mode: "controlled",
     initialValues: {
@@ -40,12 +38,24 @@ function Form() {
     return 0;
   }, [form.values.firstDate, form.values.lastDate]);
 
-
-
   return (
     <>
       <h1>Applying For Leave</h1>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form
+        onSubmit={form.onSubmit((values) => {
+          console.log(values);
+          if (
+            form.values.creditAvailableForEmployee !== null &&
+            daysRequested > form.values.creditAvailableForEmployee
+          ) {
+            toast.error(
+              "Holiday request denied: Not enough holiday credit for the selected days."
+            );
+          } else {
+            toast.success("Holiday Request Has been Successfully!");
+          }
+        })}
+      >
         <Select
           label="Reason for Leave"
           placeholder="Choose a Reason"
@@ -62,7 +72,7 @@ function Form() {
             valueFormat="YYYY MMM DD"
             key={form.key("firstDate")}
             {...form.getInputProps("firstDate")}
-             minDate={new Date()}
+            minDate={new Date()}
           />
           <DateInput
             style={{ flex: 1 }}
@@ -71,7 +81,7 @@ function Form() {
             valueFormat="YYYY MMM DD"
             key={form.key("lastDate")}
             {...form.getInputProps("lastDate")}
-              minDate={form.values.firstDate || new Date()}
+            minDate={form.values.firstDate || new Date()}
           />
           <NumberInput
             label="Your Available Days"
@@ -85,16 +95,17 @@ function Form() {
           />
         </Flex>
         {form.values.creditAvailableForEmployee && (
-            <Text mb={20}
-              c={
-                daysRequested > form.values.creditAvailableForEmployee
-                  ? "red"
-                  : "dimmed"
-              }
-            >
-              Requesting {daysRequested} day(s)
-            </Text>
-          )}
+          <Text
+            mb={20}
+            c={
+              daysRequested > form.values.creditAvailableForEmployee
+                ? "red"
+                : "dimmed"
+            }
+          >
+            Requesting {daysRequested} day(s)
+          </Text>
+        )}
         <Textarea
           style={{ flex: 1 }}
           size="md"
